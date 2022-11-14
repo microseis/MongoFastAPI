@@ -1,0 +1,20 @@
+version: '3'
+services:
+  app:
+    container_name: fastapi_app
+    build: .
+    restart: on-failure
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+  mongodb:
+    container_name: fastapi_mongo
+    image: mongo:latest
+    restart: always
+    ports: 
+      - "27017:27017"
+    volumes:
+      - ./data:/data/db
+volumes:
+  mongodb:
